@@ -1,0 +1,337 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Glow &amp; Co. — Smart Salon Appointments</title>
+    <meta
+      name="description"
+      content="Book your salon appointment online — haircuts, spa, skin, makeup & more."
+    />
+    <link rel="stylesheet" href="css/variables.css" />
+    <link rel="stylesheet" href="css/style.css" />
+    <style>
+      .slot-empty-state {
+        grid-column: 1 / -1;
+        padding: 20px 0;
+      }
+
+      .summary-box {
+        text-align: left;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- ===================== NAVBAR ===================== -->
+    <header class="navbar">
+      <div class="container">
+        <a href="#home" class="brand"
+          ><span class="mark">Q</span>QueueLess-Smart Salon</a
+        >
+        <nav class="nav-links" id="navLinks">
+          <a href="#services">Services</a>
+          <a href="#stylists">Stylists</a>
+          <a href="#book">Book Now</a>
+          <a href="#my-appointments">My Appointments</a>
+        </nav>
+        <div class="nav-cta">
+          <a href="#book" class="btn btn-primary btn-sm">Book Appointment</a>
+        </div>
+        <button class="nav-toggle" id="navToggle" aria-label="Menu">☰</button>
+      </div>
+    </header>
+
+    <!-- ===================== HERO ===================== -->
+    <section class="hero" id="home">
+      <div class="container">
+        <div class="hero-copy reveal">
+          <span class="eyebrow">Smart Salon Appointment System</span>
+          <h1>Your next great <em>hair day</em> starts with one tap.</h1>
+          <p>
+            Pick a service, pick your favourite stylist, and grab a slot that
+            fits your day — no calls, no waiting on hold. Real-time
+            availability, always up to date.
+          </p>
+          <div class="hero-actions">
+            <a href="#book" class="btn btn-primary">Book an appointment</a>
+            <a href="#services" class="btn btn-ghost">View services</a>
+          </div>
+          <div class="hero-stats">
+            <div>
+              <strong id="statServices">—</strong><span>Services offered</span>
+            </div>
+            <div>
+              <strong id="statStylists">—</strong><span>Expert stylists</span>
+            </div>
+            <div><strong>7 Days</strong><span>A week, open late</span></div>
+          </div>
+        </div>
+
+        <div class="ticket reveal">
+          <div class="ticket-top">
+            <span class="eyebrow">Appointment Ticket</span>
+            <h3>Hair Spa + Styling</h3>
+          </div>
+          <div class="ticket-divider"></div>
+          <div class="ticket-body">
+            <div class="ticket-row"><span>Guest</span><span>You :)</span></div>
+            <div class="ticket-row">
+              <span>Stylist</span><span>Priya Sharma</span>
+            </div>
+            <div class="ticket-row">
+              <span>Date</span><span>Choose below</span>
+            </div>
+            <div class="ticket-row">
+              <span>Time</span><span>Choose below</span>
+            </div>
+            <div class="ticket-row">
+              <span>Status</span
+              ><span class="ticket-status status-pending">Pending</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== SERVICES ===================== -->
+    <section class="section" id="services">
+      <div class="container">
+        <div class="section-head reveal">
+          <span class="eyebrow">Our Menu</span>
+          <h2>Services worth showing up for</h2>
+          <p>
+            From a quick trim to full bridal glam — every service, one clear
+            price and duration.
+          </p>
+        </div>
+        <div class="category-tabs" id="categoryTabs">
+          <button class="tab-btn active" data-cat="All">All</button>
+          <button class="tab-btn" data-cat="Hair">Hair</button>
+          <button class="tab-btn" data-cat="Skin">Skin</button>
+          <button class="tab-btn" data-cat="Nails">Nails</button>
+          <button class="tab-btn" data-cat="Makeup">Makeup</button>
+          <button class="tab-btn" data-cat="Spa">Spa</button>
+        </div>
+        <div class="service-grid" id="serviceGrid">
+          <p class="empty-note">Loading services…</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== STYLISTS ===================== -->
+    <section class="section section-alt" id="stylists">
+      <div class="container">
+        <div class="section-head reveal">
+          <span class="eyebrow">Meet The Team</span>
+          <h2>Stylists who know their craft</h2>
+          <p>
+            Every artist on our floor is trained, certified and genuinely
+            obsessed with getting it right.
+          </p>
+        </div>
+        <div class="stylist-grid" id="stylistGrid">
+          <p class="empty-note">Loading stylists…</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== BOOKING ===================== -->
+    <section class="section" id="book">
+      <div class="container">
+        <div class="section-head reveal">
+          <span class="eyebrow">Reserve Your Slot</span>
+          <h2>Book in four quick steps</h2>
+          <p>
+            Choose your service, your stylist, a slot that works — and you're
+            done.
+          </p>
+        </div>
+
+        <div class="booking-wrap reveal">
+          <div class="stepper">
+            <div class="step active" data-step="1"><span>01</span>Service</div>
+            <div class="step" data-step="2"><span>02</span>Stylist</div>
+            <div class="step" data-step="3"><span>03</span>Date &amp; Time</div>
+            <div class="step" data-step="4"><span>04</span>Your Details</div>
+          </div>
+
+          <!-- Step 1: Service -->
+          <div class="step-panel active" data-panel="1">
+            <div class="pick-grid" id="bookServiceGrid"></div>
+            <div class="step-actions">
+              <span></span>
+              <button class="btn btn-primary" id="toStep2" disabled>
+                Continue →
+              </button>
+            </div>
+          </div>
+
+          <!-- Step 2: Stylist -->
+          <div class="step-panel" data-panel="2">
+            <div class="pick-grid" id="bookStylistGrid"></div>
+            <div class="step-actions">
+              <button class="btn btn-ghost" data-back="1">← Back</button>
+              <button class="btn btn-primary" id="toStep3" disabled>
+                Continue →
+              </button>
+            </div>
+          </div>
+
+          <!-- Step 3: Date & Time -->
+          <div class="step-panel" data-panel="3">
+            <div class="field">
+              <label for="bookDate">Choose a date</label>
+              <input type="date" id="bookDate" />
+            </div>
+            <div class="field">
+              <label>Available time slots</label>
+              <div class="slot-grid" id="slotGrid">
+                <p class="empty-note slot-empty-state">
+                  Select a date to see open slots
+                </p>
+              </div>
+            </div>
+            <div class="step-actions">
+              <button class="btn btn-ghost" data-back="2">← Back</button>
+              <button class="btn btn-primary" id="toStep4" disabled>
+                Continue →
+              </button>
+            </div>
+          </div>
+
+          <!-- Step 4: Details + confirm -->
+          <div class="step-panel" data-panel="4">
+            <div class="summary-box" id="bookingSummary"></div>
+            <form id="bookingForm">
+              <div class="form-row">
+                <div class="field">
+                  <label for="custName">Full name</label>
+                  <input
+                    type="text"
+                    id="custName"
+                    required
+                    placeholder="e.g. Anjali Gupta"
+                  />
+                </div>
+                <div class="field">
+                  <label for="custPhone">Phone number</label>
+                  <input
+                    type="tel"
+                    id="custPhone"
+                    required
+                    placeholder="10-digit mobile number"
+                    pattern="[0-9]{10}"
+                  />
+                </div>
+              </div>
+              <div class="field">
+                <label for="custEmail">Email (optional)</label>
+                <input
+                  type="email"
+                  id="custEmail"
+                  placeholder="you@example.com"
+                />
+              </div>
+              <div class="field">
+                <label for="custNotes">Notes for your stylist (optional)</label>
+                <textarea
+                  id="custNotes"
+                  placeholder="Allergies, preferences, anything we should know…"
+                ></textarea>
+              </div>
+              <div class="step-actions">
+                <button type="button" class="btn btn-ghost" data-back="3">
+                  ← Back
+                </button>
+                <button type="submit" class="btn btn-gold">
+                  Confirm booking
+                </button>
+              </div>
+            </form>
+          </div>
+
+          <!-- Confirmation -->
+          <div class="step-panel" data-panel="confirm">
+            <div class="confirm-screen">
+              <div class="confirm-icon">✓</div>
+              <h3>You're all set!</h3>
+              <p>
+                We've saved your appointment. Save this ID to manage your
+                booking anytime.
+              </p>
+              <div class="booking-id" id="confirmId">#SALON-000000</div>
+              <div class="summary-box" id="confirmSummary"></div>
+              <button class="btn btn-primary" id="bookAnother">
+                Book another appointment
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== MY APPOINTMENTS ===================== -->
+    <section class="section section-alt" id="my-appointments">
+      <div class="container">
+        <div class="section-head reveal">
+          <span class="eyebrow">Manage Booking</span>
+          <h2>Find your appointment</h2>
+          <p>
+            Enter the phone number you booked with to view or cancel your
+            appointments.
+          </p>
+        </div>
+        <form class="lookup-form reveal" id="lookupForm">
+          <input
+            type="tel"
+            id="lookupPhone"
+            placeholder="Enter your 10-digit phone number"
+            pattern="[0-9]{10}"
+            required
+          />
+          <button type="submit" class="btn btn-primary">Find</button>
+        </form>
+        <div class="appt-list" id="apptList"></div>
+      </div>
+    </section>
+
+    <!-- ===================== FOOTER ===================== -->
+    <footer class="footer">
+      <div class="container">
+        <div>
+          <a href="#home" class="brand"
+            ><span class="mark">Q</span>QueueLess-Smart Salon</a
+          >
+          <p>
+            A modern salon for hair, skin, nails and makeup — booked entirely
+            online, no waiting on hold.
+          </p>
+        </div>
+        <div>
+          <h4>Visit Us</h4>
+          <p>
+            Shop 12, MG Road<br />Khairāgarh, Uttar Pradesh<br />Open all week,
+            10am – 8pm
+          </p>
+        </div>
+        <div>
+          <h4>Quick Links</h4>
+          <ul>
+            <li><a href="#services">Services</a></li>
+            <li><a href="#stylists">Stylists</a></li>
+            <li><a href="#book">Book Now</a></li>
+            <li><a href="admin.html">Admin Login</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        © <span id="year"></span> Glow &amp; Co. Smart Salon Appointment System.
+      </div>
+    </footer>
+
+    <div class="toast" id="toast"></div>
+
+    <script src="js/localdb.js"></script>
+    <script src="js/main.js"></script>
+  </body>
+</html>

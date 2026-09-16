@@ -1,0 +1,403 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admin Dashboard — Glow &amp; Co.</title>
+    <link rel="stylesheet" href="css/variables.css" />
+    <link rel="stylesheet" href="css/admin.css" />
+    <style>
+      .login-field {
+        margin-bottom: 14px;
+      }
+      .login-field--password {
+        margin-bottom: 22px;
+      }
+      .login-label {
+        font-size: 0.8rem;
+        font-weight: 700;
+        color: var(--plum);
+        display: block;
+        margin-bottom: 6px;
+      }
+      .login-input {
+        width: 100%;
+        padding: 12px 14px;
+        border-radius: 8px;
+        border: 1.5px solid var(--line);
+      }
+      .login-submit {
+        width: 100%;
+      }
+      .back-link {
+        color: var(--rose);
+        font-size: 0.85rem;
+        font-weight: 600;
+      }
+      .login-footer {
+        margin-top: 18px;
+      }
+      .admin-brand-mark {
+        width: 30px;
+        height: 30px;
+        font-size: 0.9rem;
+      }
+      .inline-check-field {
+        flex-direction: row;
+        align-items: center;
+        gap: 8px;
+      }
+      .inline-check-field input {
+        width: auto;
+      }
+      .inline-check-field label {
+        margin: 0;
+      }
+      .action-row {
+        display: flex;
+        gap: 10px;
+        margin-top: 6px;
+      }
+      .hidden-inline {
+        display: none;
+      }
+    </style>
+  </head>
+  <body class="admin-body">
+    <!-- ===================== LOGIN ===================== -->
+    <div class="login-screen" id="loginScreen">
+      <div class="login-card">
+        <div class="mark">G</div>
+        <h2>Admin Login</h2>
+        <p>Sign in to manage appointments, services &amp; stylists.</p>
+        <div class="login-error" id="loginError"></div>
+        <form id="loginForm">
+          <div class="field login-field">
+            <label for="loginEmail" class="login-label">Email</label>
+            <input
+              type="email"
+              id="loginEmail"
+              class="login-input"
+              required
+              placeholder="admin@smartsalon.com"
+            />
+          </div>
+          <div class="field login-field login-field--password">
+            <label for="loginPassword" class="login-label">Password</label>
+            <input
+              type="password"
+              id="loginPassword"
+              class="login-input"
+              required
+              placeholder="••••••••"
+            />
+          </div>
+          <button type="submit" class="btn btn-primary login-submit">
+            Sign In
+          </button>
+        </form>
+        <div class="login-hint">
+          <!-- Default login: admin@smartsalon.com / Admin@123 -->
+        </div>
+        <p class="login-footer">
+          <a href="index.html" class="back-link">← Back to website</a>
+        </p>
+      </div>
+    </div>
+
+    <!-- ===================== DASHBOARD ===================== -->
+    <div class="admin-shell" id="adminShell">
+      <aside class="admin-sidebar">
+        <div class="brand">
+          <span class="mark admin-brand-mark">Q</span>
+          QueueLess Admin
+        </div>
+        <nav class="admin-nav" id="adminNav">
+          <button data-view="overview" class="active">📊 Overview</button>
+          <button data-view="appointments">📅 Appointments</button>
+          <button data-view="services">💇 Services</button>
+          <button data-view="stylists">🧑‍🎨 Stylists</button>
+        </nav>
+        <div class="spacer"></div>
+        <button class="logout-btn" id="logoutBtn">Log out</button>
+      </aside>
+
+      <main class="admin-main">
+        <!-- ---------- OVERVIEW ---------- -->
+        <section class="admin-view active" data-view="overview">
+          <div class="admin-header">
+            <div>
+              <h2>Overview</h2>
+              <p>A quick look at today's business.</p>
+            </div>
+          </div>
+          <div class="stat-grid">
+            <div class="stat-card">
+              <div class="num" id="statToday">—</div>
+              <div class="label">Today's appointments</div>
+            </div>
+            <div class="stat-card">
+              <div class="num" id="statPending">—</div>
+              <div class="label">Pending confirmation</div>
+            </div>
+            <div class="stat-card">
+              <div class="num" id="statTotalServices">—</div>
+              <div class="label">Active services</div>
+            </div>
+            <div class="stat-card">
+              <div class="num" id="statTotalStylists">—</div>
+              <div class="label">Active stylists</div>
+            </div>
+          </div>
+          <div class="panel">
+            <h3>Today's schedule</h3>
+            <div id="todayTableWrap"><p class="empty-note">Loading…</p></div>
+          </div>
+        </section>
+
+        <!-- ---------- APPOINTMENTS ---------- -->
+        <section class="admin-view" data-view="appointments">
+          <div class="admin-header">
+            <div>
+              <h2>Appointments</h2>
+              <p>View, confirm, complete or cancel bookings.</p>
+            </div>
+          </div>
+          <div class="filter-bar">
+            <label for="filterDate" class="sr-only"
+              >Filter appointments by date</label
+            >
+            <input
+              type="date"
+              id="filterDate"
+              aria-label="Filter appointments by date"
+            />
+            <label for="filterStatus" class="sr-only"
+              >Filter appointments by status</label
+            >
+            <select
+              id="filterStatus"
+              aria-label="Filter appointments by status"
+            >
+              <option value="">All statuses</option>
+              <option value="pending">Pending</option>
+              <option value="confirmed">Confirmed</option>
+              <option value="completed">Completed</option>
+              <option value="cancelled">Cancelled</option>
+            </select>
+            <button class="btn btn-ghost btn-sm" id="clearFilters">
+              Clear filters
+            </button>
+          </div>
+          <div class="panel">
+            <div id="apptTableWrap"><p class="empty-note">Loading…</p></div>
+          </div>
+        </section>
+
+        <!-- ---------- SERVICES ---------- -->
+        <section class="admin-view" data-view="services">
+          <div class="admin-header">
+            <div>
+              <h2>Services</h2>
+              <p>Add, edit or remove services from your menu.</p>
+            </div>
+          </div>
+          <div class="manage-grid">
+            <div class="panel">
+              <h3 id="serviceFormTitle">Add a service</h3>
+              <form id="serviceForm">
+                <input type="hidden" id="serviceId" />
+                <div class="field">
+                  <label>Name</label>
+                  <input
+                    type="text"
+                    id="serviceName"
+                    required
+                    placeholder="e.g. Haircut & Styling"
+                  />
+                </div>
+                <div class="form-row">
+                  <div class="field">
+                    <label for="serviceCategory">Category</label>
+                    <select id="serviceCategory" aria-label="Service category">
+                      <option>Hair</option>
+                      <option>Skin</option>
+                      <option>Nails</option>
+                      <option>Makeup</option>
+                      <option>Spa</option>
+                      <option>Other</option>
+                    </select>
+                  </div>
+                  <div class="field">
+                    <label>Duration (mins)</label>
+                    <input
+                      type="number"
+                      id="serviceDuration"
+                      required
+                      min="5"
+                      placeholder="45"
+                    />
+                  </div>
+                </div>
+                <div class="field">
+                  <label>Price (₹)</label>
+                  <input
+                    type="number"
+                    id="servicePrice"
+                    required
+                    min="0"
+                    placeholder="399"
+                  />
+                </div>
+                <div class="field">
+                  <label>Description</label>
+                  <textarea
+                    id="serviceDescription"
+                    rows="2"
+                    placeholder="Short description shown to customers"
+                  ></textarea>
+                </div>
+                <div class="field inline-check-field">
+                  <input type="checkbox" id="serviceActive" checked />
+                  <label for="serviceActive"
+                    >Active (visible to customers)</label
+                  >
+                </div>
+                <div class="action-row">
+                  <button type="submit" class="btn btn-primary btn-sm">
+                    Save service
+                  </button>
+                  <button
+                    type="button"
+                    class="btn btn-ghost btn-sm hidden-inline"
+                    id="serviceCancelEdit"
+                  >
+                    Cancel edit
+                  </button>
+                </div>
+              </form>
+            </div>
+            <div class="panel">
+              <h3>All services</h3>
+              <div id="serviceTableWrap">
+                <p class="empty-note">Loading…</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ---------- STYLISTS ---------- -->
+        <section class="admin-view" data-view="stylists">
+          <div class="admin-header">
+            <div>
+              <h2>Stylists</h2>
+              <p>Manage your team and their working hours.</p>
+            </div>
+          </div>
+          <div class="manage-grid">
+            <div class="panel">
+              <h3 id="stylistFormTitle">Add a stylist</h3>
+              <form id="stylistForm">
+                <input type="hidden" id="stylistId" />
+                <div class="field">
+                  <label>Name</label>
+                  <input
+                    type="text"
+                    id="stylistName"
+                    required
+                    placeholder="e.g. Priya Sharma"
+                  />
+                </div>
+                <div class="field">
+                  <label>Specialty</label>
+                  <input
+                    type="text"
+                    id="stylistSpecialty"
+                    placeholder="e.g. Senior Hair Stylist"
+                  />
+                </div>
+                <div class="form-row">
+                  <div class="field">
+                    <label>Experience (years)</label>
+                    <input
+                      type="number"
+                      id="stylistExperience"
+                      min="0"
+                      placeholder="5"
+                    />
+                  </div>
+                  <div class="field"></div>
+                </div>
+                <div class="form-row">
+                  <div class="field">
+                    <label for="stylistStart">Work start</label>
+                    <input type="time" id="stylistStart" value="10:00" />
+                  </div>
+                  <div class="field">
+                    <label for="stylistEnd">Work end</label>
+                    <input type="time" id="stylistEnd" value="19:00" />
+                  </div>
+                </div>
+                <div class="field">
+                  <label>Weekly off day(s)</label>
+                  <div class="chip-row" id="weeklyOffChips">
+                    <button type="button" class="day-chip" data-day="0">
+                      Sun
+                    </button>
+                    <button type="button" class="day-chip" data-day="1">
+                      Mon
+                    </button>
+                    <button type="button" class="day-chip" data-day="2">
+                      Tue
+                    </button>
+                    <button type="button" class="day-chip" data-day="3">
+                      Wed
+                    </button>
+                    <button type="button" class="day-chip" data-day="4">
+                      Thu
+                    </button>
+                    <button type="button" class="day-chip" data-day="5">
+                      Fri
+                    </button>
+                    <button type="button" class="day-chip" data-day="6">
+                      Sat
+                    </button>
+                  </div>
+                </div>
+                <div class="field inline-check-field">
+                  <input type="checkbox" id="stylistActive" checked />
+                  <label for="stylistActive"
+                    >Active (visible to customers)</label
+                  >
+                </div>
+                <div class="action-row">
+                  <button type="submit" class="btn btn-primary btn-sm">
+                    Save stylist
+                  </button>
+                  <button
+                    type="button"
+                    class="btn btn-ghost btn-sm hidden-inline"
+                    id="stylistCancelEdit"
+                  >
+                    Cancel edit
+                  </button>
+                </div>
+              </form>
+            </div>
+            <div class="panel">
+              <h3>All stylists</h3>
+              <div id="stylistTableWrap">
+                <p class="empty-note">Loading…</p>
+              </div>
+            </div>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <div class="toast" id="toast"></div>
+
+    <script src="js/localdb.js"></script>
+    <script src="js/admin.js"></script>
+  </body>
+</html>

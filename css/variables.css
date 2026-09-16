@@ -1,0 +1,167 @@
+/* ============================================
+   GLOW & CO. — Design Tokens
+   Ek boutique salon ke liye elegant, warm identity.
+   ============================================ */
+
+@import url("https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,500&family=Manrope:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500&display=swap");
+
+:root {
+  /* ---- Colors ---- */
+  --ink: #2B1A20;           /* primary text / near-black warm ink */
+  --ink-soft: #6B5560;      /* secondary text */
+  --plum: #3B1B2B;          /* deep header / footer bg */
+  --plum-deep: #2B1220;
+  --rose: #8C3B4E;          /* secondary accent — status, links */
+  --gold: #C9A15A;          /* primary accent — CTAs, highlights */
+  --gold-deep: #A9823F;
+  --blush: #F3DCD4;         /* soft accent bg */
+  --ivory: #FBF6F1;         /* page background */
+  --paper: #FFFFFF;         /* card background */
+  --line: #E7D9CE;          /* hairline borders */
+  --success: #4E7A51;
+  --success-bg: #E7F0E4;
+  --pending-bg: #FBF0D9;
+  --pending: #96741E;
+  --cancel-bg: #F5DEDE;
+  --cancel: #A23B3B;
+  --info-bg: #E3E8EE;
+  --info: #3B5A8C;
+
+  /* ---- Type ---- */
+  --font-display: "Fraunces", "Georgia", serif;
+  --font-body: "Manrope", -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-mono: "IBM Plex Mono", "Courier New", monospace;
+
+  /* ---- Spacing / Layout ---- */
+  --radius-sm: 8px;
+  --radius-md: 16px;
+  --radius-lg: 28px;
+  --shadow-soft: 0 12px 32px -12px rgba(43, 26, 32, 0.18);
+  --shadow-card: 0 4px 18px -6px rgba(43, 26, 32, 0.12);
+  --max-width: 1180px;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-body);
+  color: var(--ink);
+  background: var(--ivory);
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+}
+
+h1, h2, h3, h4 {
+  font-family: var(--font-display);
+  font-weight: 600;
+  color: var(--plum);
+  line-height: 1.15;
+}
+
+.container {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 28px;
+}
+
+.eyebrow {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--gold-deep);
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+.eyebrow::before {
+  content: "";
+  width: 22px;
+  height: 1px;
+  background: var(--gold-deep);
+  display: inline-block;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 14px 28px;
+  border-radius: 999px;
+  border: none;
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: 0.92rem;
+  transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
+}
+.btn:focus-visible {
+  outline: 2px solid var(--gold-deep);
+  outline-offset: 3px;
+}
+.btn-primary {
+  background: var(--plum);
+  color: var(--ivory);
+  box-shadow: var(--shadow-card);
+}
+.btn-primary:hover {
+  background: var(--plum-deep);
+  transform: translateY(-2px);
+}
+.btn-gold {
+  background: var(--gold);
+  color: var(--plum-deep);
+}
+.btn-gold:hover {
+  background: var(--gold-deep);
+  transform: translateY(-2px);
+}
+.btn-ghost {
+  background: transparent;
+  color: var(--plum);
+  border: 1.5px solid var(--line);
+}
+.btn-ghost:hover {
+  border-color: var(--plum);
+}
+.btn:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+  transform: none !important;
+}
+
+.btn-sm {
+  padding: 9px 16px;
+  font-size: 0.8rem;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation: none !important;
+    transition: none !important;
+    scroll-behavior: auto !important;
+  }
+}
