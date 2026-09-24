@@ -1,24 +1,22 @@
-
 # Glow & Co. Salon — Simple Static Version
 
-Ye Smart Salon Appointment project ka simple, beginner-level static version
-hai. Koi JavaScript file nahi hai — sirf plain **HTML** aur **CSS**.
+This is a simple, beginner-level static version of the Smart Salon Appointment project.
+
+It uses only **HTML** and **CSS** — there is **no JavaScript** included.
 
 ## Files
 
-- `index.html` — Home page (services, stylists, booking form, appointment lookup)
-- `admin.html` — Simple admin login page + sample appointments table
-- `css/style.css` — Ek hi stylesheet, dono pages ke liye
+* `index.html` — Home page (services, stylists, booking form, appointment lookup)
+* `admin.html` — Simple admin login page with a sample appointments table
+* `css/style.css` — Single stylesheet used for both pages
 
-## Kaise chalayein
+## How to Run
 
-Koi build step ya install nahi chahiye. Bas `index.html` ko double-click
-karke browser mein khol dein.
+No installation or build steps are required.
+Simply double-click the `index.html` file to open it in your browser.
 
-## Note
+## Notes
 
-- Sab services aur stylists hardcoded hain HTML mein (dynamic loading nahi hai).
-- Booking form aur "My Appointments" form sirf demo ke liye hain — inmein
-  koi real functionality nahi hai (submit karne par kuch save nahi hota,
-  kyunki koi JavaScript ya backend nahi hai).
-- Admin login bhi sirf ek static form hai, real authentication nahi hai.
+* All services and stylists are hardcoded in the HTML (no dynamic loading).
+* The booking form and “My Appointments” section are for demonstration only — they do not store or process any data because there is no JavaScript or backend.
+* The admin login is also a static form and does not provide real authentication.
