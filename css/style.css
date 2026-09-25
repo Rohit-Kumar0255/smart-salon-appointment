@@ -32,7 +32,10 @@ img {
   margin: 0 auto;
 }
 
-h1, h2, h3, h4 {
+h1,
+h2,
+h3,
+h4 {
   color: #6b2140;
   margin-bottom: 10px;
 }
@@ -317,7 +320,7 @@ table tr:nth-child(even) {
 
 /* ===== Footer ===== */
 .footer {
-  background-color: #2c2c2c;
+  background-color: #561a33;
   color: #cccccc;
   padding: 40px 0 15px 0;
 }
